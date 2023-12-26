@@ -1,0 +1,5 @@
+outs:
+- md5: 9efd6f295220d3aef6fd8d9cc692248c
+  size: 12733872
+  hash: md5
+  path: final_ocr.pt

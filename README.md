@@ -2,7 +2,7 @@
 
 ### Ссылка на сервис (временная)
 
-[Ссылка](http://91.206.15.25:1667/docs)
+[Ссылка](http://91.206.15.25:1767/docs)
 
 
 ### Описание API, примеры запросов
@@ -50,7 +50,7 @@ make run_app
 
 ### Где искать докер-образы сервиса и как сбилдить свежий образ
 
-`registry.deepschool.ru/cvr-aug23/j.polushina/hw-01-service`
+`registry.deepschool.ru/cvr-aug23/j.polushina/hw-02-service`
 
 
 ### Статический анализ - Линтеры
