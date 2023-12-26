@@ -29,8 +29,8 @@ pull_model:
     - make download_weights
   artifacts:
     paths:
-      - models/*.pt
-      - models/*.onnx
+      - models/ts_script_model/*.pt
+      - models/onnx_model/*.onnx
     expire_in: 3 day
 
 .docker_login: &docker_login
