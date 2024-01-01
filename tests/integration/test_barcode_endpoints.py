@@ -16,7 +16,7 @@ def test_predict(client: TestClient, sample_images_bytes: bytes):
 
     assert response.status_code == HTTPStatus.OK
 
-    predicted_value = response.json()['77.jpg']['value']
+    predicted_value = response.json()['77.jpg'][0]['value']
 
     assert isinstance(predicted_value, str)
     assert len(predicted_value)==13

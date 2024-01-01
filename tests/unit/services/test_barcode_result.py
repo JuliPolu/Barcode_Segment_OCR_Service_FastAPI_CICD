@@ -10,14 +10,14 @@ from src.containers.containers import AppContainer
 class FakeBarcodeSegmenter:
 
     def predict_barcode_bbox(self, image):
-        return  {
+        return  [{
             'bbox': {
                 'x_min': 203,
                 'x_max': 717,
                 'y_min': 572,
                 'y_max': 939,
             },
-        }
+        },]
 
 
 class FakeBarcodeOCR:
@@ -31,8 +31,8 @@ def test_predicts_not_fail(app_container: AppContainer, sample_image_np: np.ndar
         with app_container.barcode_segmenter.override(FakeBarcodeSegmenter()), \
                 app_container.barcode_ocr.override(FakeBarcodeOCR()):
             barcode_result = app_container.barcode_result()
-            barcode_result.predict(sample_image_np)
-
+            result = barcode_result.predict(sample_image_np)
+            print(result)
 
 def test_predict_dont_mutate_initial_image(app_container: AppContainer, sample_image_np: np.ndarray):
     with app_container.reset_singletons():

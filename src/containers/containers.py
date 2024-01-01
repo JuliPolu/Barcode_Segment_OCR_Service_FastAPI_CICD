@@ -10,12 +10,12 @@ class AppContainer(containers.DeclarativeContainer):
 
     barcode_segmenter = providers.Singleton(
         BarcodeSegmenter,
-        config=config.services.barcode_segmenter,
+        config=config.services.segmenter,
     )
 
     barcode_ocr = providers.Singleton(
         BarcodeOCR,
-        config=config.services.barcode_ocr,
+        config=config.services.ocr,
     )
 
     barcode_result = providers.Singleton(

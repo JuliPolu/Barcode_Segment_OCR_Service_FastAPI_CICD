@@ -1,3 +1,4 @@
+from src.config import SegmenterConfig
 import typing as tp
 
 import numpy as np
@@ -9,19 +10,12 @@ from src.services.utils_seg_prepostprocess import preprocess_image_segment, mask
 
 class BarcodeSegmenter:
 
-    def __init__(self, config: tp.Dict):
-        self._model_path = config['segmetn_model_path']
-        self._device = config['device']
+    def __init__(self, config: SegmenterConfig):
+        self._config = config
         self._ort_session = ort.InferenceSession(
-            self._model_path,
-            providers=[
-                'CPUExecutionProvider',
-            ],
+            self._config['model_path'],
+            providers=[self._config['ort_provider']],
         )
-        self._size: int = config['img_input_size']
-        self._threshold = config['threshold']
-        self._model_encoder = config['segment_encoder']
-        self._pretrained_weights = config['segment_pretr_weights']
 
     def predict_barcode_bbox(self, image: np.ndarray) -> tp.List[str]:
         """Prediction of barcode bounding box
@@ -45,9 +39,7 @@ class BarcodeSegmenter:
         """
         image = preprocess_image_segment(
             image,
-            self._size,
-            self._model_encoder,
-            self._pretrained_weights,
+            self._config['img_input_size'],
         )
         input_name = self._ort_session.get_inputs()[0].name
         output = self._ort_session.run(None, {input_name: image[None]})
@@ -65,6 +57,11 @@ class BarcodeSegmenter:
             Binary mask of barcode location
         """
         original_size = (image.shape[1], image.shape[0])
-        mask = mask_postprocesing(predict, self._threshold, original_size)
+        mask = mask_postprocesing(
+            predict,
+            self._config['threshold_prob'],
+            original_size,
+            self._config['threshold_size'],
+        )
 
         return mask_to_bbox(mask)

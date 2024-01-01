@@ -22,11 +22,12 @@ class BarcodeResult:
         Return:
             A dictionary containing barcode bbox coordinates and numbers
         """
-        bbox_dict = self._barcode_segmenter.predict_barcode_bbox(image)
-        if bbox_dict['bbox']['x_min']:
-            cropped_image = crop_image(image, bbox_dict)
-            ocr_result = self._barcode_ocr.predict_barcode_text(cropped_image)
-        else:
+        final_result = []
+        bbox_dict_list = self._barcode_segmenter.predict_barcode_bbox(image)
+        for barcode in bbox_dict_list:
             ocr_result = {'value': None}
-
-        return {**bbox_dict, **ocr_result}
+            if barcode['bbox'] is not None:
+                cropped_image = crop_image(image, barcode)
+                ocr_result = self._barcode_ocr.predict_barcode_text(cropped_image)
+            final_result.append({**barcode, **ocr_result})
+        return final_result

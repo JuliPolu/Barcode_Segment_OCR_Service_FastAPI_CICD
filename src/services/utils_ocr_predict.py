@@ -36,9 +36,10 @@ def decode(   # noqa: WPS210, WPS234
         result_one_labels = []
         result_one_confidences = []
         for lab, group in itertools.groupby(zip(label, conf), operator.itemgetter(0)):  # noqa: WPS221
-            if lab > 0:
-                result_one_labels.append(lab)
-                result_one_confidences.append(max(list(zip(*group))[1]))
+            if lab <= 0:
+                continue
+            result_one_labels.append(lab)
+            result_one_confidences.append(max(list(zip(*group))[1]))
         result_labels.append(result_one_labels)
         result_confidences.append(np.array(result_one_confidences))
 

@@ -64,7 +64,6 @@ snowballstemmer==2.2.0
 soupsieve==2.3.2.post1
 starlette==0.19.1
 stevedore==4.0.0
-segmentation_models_pytorch
 testfixtures==6.18.5
 timm==0.9.2
 tomli==2.0.1

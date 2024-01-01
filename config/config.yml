@@ -1,14 +1,14 @@
 services:
-  barcode_segmenter:
-    segmetn_model_path: 'models/onnx_model/onnx_model.onnx'
+  segmenter:
+    model_path: 'models/onnx_model/onnx_model.onnx'
     device: 'cpu'
+    ort_provider: 'CPUExecutionProvider'
     img_input_size: 256
-    threshold: 0.4
-    segment_encoder: 'resnet34'
-    segment_pretr_weights: 'imagenet'
-  barcode_ocr:
-    ocr_model_path: 'models/ts_script_model/final_ocr.pt'
+    threshold_prob: 0.4
+    threshold_size: 30
+  ocr:
+    model_path: 'models/ts_script_model/final_ocr.pt'
     device: 'cpu'
-    ocr_width: 416
-    ocr_height: 96
+    width: 416
+    height: 96
     vocab: '0123456789'
