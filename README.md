@@ -1,4 +1,15 @@
-#FastAPI Application for Satelite Images classification (Pet Project)
+# FastAPI Application for Satelite Images classification
+
+
+## Основная задача
+FastAPI Сервис по детекции штрих-кодов по фотографиям c последующим распознаванием цифр на каждом штрих-коде (OCR).
+Данный репозиторий подготовлен в рамках 2-й проектной работы курса 'CV-Rocket' от команды Deepschool, часть по созданию сервиса в парадигме GitLab CI/CD.
+
+
+## Используемый стэк
+
+FastAPI, Pytorch, albumentations, onnxruntime, pydantic, pytest, wemake(flake8), OpenCV, omegaconf, dvc, ansible, Docker
+
 
 ### Ссылка на сервис (временная)
 
